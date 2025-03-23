@@ -1,0 +1,17 @@
+﻿<div style="padding-top:30px">
+    <h3>List Of Movies</h3>
+    <table class="table">
+        <tr><td><p>Name</p></td><td><p>Director</p></td><td><p>Genre</p></td><td><p>Year Of Release</p></td><td><p>Poster</p></td><td><p>Description</p></td></tr>
+        @foreach (var st in ViewBag.Movies)
+        {
+            <tr><td><p>@st.Name</p></td><td><p>@st.Director</p></td><td><p>@st.Genre</p></td><td><p>@st.YearOfRelease</p></td><td><img src="@Url.Content(st.Poster)" alt="@st.Name" width="100"></td><td><p>@st.Description</p></td><td>
+                        <a asp-action="Edit" asp-route-id="@st.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@st.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@st.Id">Delete</a>
+             </td></tr>
+            
+            
+        }
+         
+    </table>
+</div>
