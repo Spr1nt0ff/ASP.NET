@@ -1,0 +1,22 @@
+﻿<div style="padding-top:30px">
+    <h3>Список писем</h3>
+    <p>
+        <a asp-action="Login">Login</a>
+        <a asp-action="Register">Registration</a>
+    </p>
+    <table class="table">
+        <tr>
+            <td><p>Сообщение</p></td>
+            <td><p>Дата</p></td>
+            <td><p>Пользователь</p></td>
+        </tr>
+        @foreach (var item in ViewBag.Messages)
+        {
+            <tr>
+                <td><p>@item.Message</p></td>
+                <td><p>@item.MessageDate</p></td>
+                <td><p>@item.UserId</p></td>
+            </tr>
+        }
+    </table>
+</div>
