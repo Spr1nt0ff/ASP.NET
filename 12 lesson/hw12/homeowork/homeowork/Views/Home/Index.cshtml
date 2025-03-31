@@ -1,0 +1,68 @@
+﻿@model homeowork.Models.Note
+
+@{
+    ViewData["Title"] = "Notes Overview";
+}
+
+<h3>Stored Notes</h3>
+@if (ViewBag.Notes != null && ViewBag.Notes.Count > 0)
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Tags</th>
+                <th>Date Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var note in ViewBag.Notes)
+            {
+                <tr>
+                    <td><strong>@note.Title</strong></td>
+                    <td>@note.Text</td>
+                    <td>@(string.IsNullOrWhiteSpace(note.Tags) ? "None" : note.Tags)</td>
+                    <td>@note.CreatedAt</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No notes have been recorded yet.</p>
+}
+
+<h3>Add a New Note</h3>
+<hr />
+<div class="container">
+    <form asp-action="Index" class="needs-validation" novalidate>
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+        
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label">Title</label>
+            <input asp-for="Title" class="form-control" required />
+            <div class="invalid-feedback">Please provide a title.</div>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Text" class="form-label">Content</label>
+            <textarea asp-for="Text" class="form-control" rows="3" required></textarea>
+            <div class="invalid-feedback">Please enter some content.</div>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Tags" class="form-label">Tags (separated by commas)</label>
+            <input asp-for="Tags" class="form-control" placeholder="e.g. work, important, ideas" />
+        </div>
+
+        <button type="submit" class="btn btn-success">Save Note</button>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
